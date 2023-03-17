@@ -27,6 +27,7 @@ class Album extends Component {
 
   render() {
     const { favoriteMusics, artistName, collectionName, img } = this.state;
+    console.log(favoriteMusics);
     return (
       <>
         <div data-testid="page-album">
@@ -37,6 +38,7 @@ class Album extends Component {
         <img src={ img } alt={ collectionName } />
         <p data-testid="album-name">{ collectionName}</p>
         <MusicCard musics={ favoriteMusics } />
+
       </>
 
     );
