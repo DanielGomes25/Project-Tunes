@@ -34,10 +34,13 @@ class Album extends Component {
           <Header />
 
         </div>
-        <h2 data-testid="artist-name">{artistName}</h2>
-        <img src={ img } alt={ collectionName } />
-        <p data-testid="album-name">{ collectionName}</p>
-        <MusicCard musics={ favoriteMusics } />
+        <div id="album">
+          <h2 data-testid="artist-name">{artistName}</h2>
+          <img src={ img } alt={ collectionName } />
+          <p data-testid="album-name">{ collectionName}</p>
+          <MusicCard musics={ favoriteMusics } />
+
+        </div>
 
       </>
 
