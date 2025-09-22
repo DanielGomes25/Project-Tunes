@@ -281,6 +281,50 @@ audio {
   margin-bottom: 12px;
 }
 
+#loading {
+  text-align: center;
+  margin-top: 50px;
+}
+
 label {
   color: var(--muted);
+}
+
+/* Loading */
+#Loading,
+.loading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.95rem;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--outline);
+  border-top-color: var(--primary);
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
