@@ -44,53 +44,61 @@ class Search extends Component {
 
     return (
       <>
-        <div data-testid="page-search">
+        <div data-testid="page-search" className="page page-search">
           <Header />
-          <input
-            placeholder="pesquise por banda ou artista"
-            data-testid="search-artist-input"
-            type="text"
-            name="songsOrBands"
-            id="songsOrBands"
-            value={ songsOrBands }
-            onChange={ this.inputChange }
-          />
-          <button
-            data-testid="search-artist-button"
-            type="button"
-            name="btn"
-            id="btn"
-            disabled={ !ableBtn }
-            onClick={ this.searchSongsOrBands }
-          >
-            Pesquisar
-
-          </button>
+          <div className="container">
+            <div className="search-bar">
+              <input
+                className="input"
+                placeholder="Pesquise por banda ou artista"
+                data-testid="search-artist-input"
+                type="text"
+                name="songsOrBands"
+                id="songsOrBands"
+                value={ songsOrBands }
+                onChange={ this.inputChange }
+              />
+              <button
+                className="btn primary"
+                data-testid="search-artist-button"
+                type="button"
+                name="btn"
+                id="btn"
+                disabled={ !ableBtn }
+                onClick={ this.searchSongsOrBands }
+              >
+                Pesquisar
+              </button>
+            </div>
+            <div className="results-header">
+              <p>
+                {mensage}
+                {' '}
+                {artist}
+              </p>
+            </div>
+            <div className="album-grid">
+              {arraySongs.length === 0 ? <p className="muted">Nenhum álbum foi encontrado</p> : (
+                arraySongs.map((song) => (
+                  <div key={ song.collectionId } className="album-card">
+                    <img src={ song.artworkUrl100 } alt={ song.collectionName } className="album-cover" />
+                    <div className="album-info">
+                      <h3 className="album-title">{song.collectionName}</h3>
+                      <p className="album-artist">{song.artistName}</p>
+                      <Link
+                        className="btn outline"
+                        data-testid={ `link-to-album-${song.collectionId}` }
+                        to={ `/album/${song.collectionId}` }
+                      >
+                        Ver Álbum
+                      </Link>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
         </div>
-        <form>
-          <p>
-
-            {mensage}
-            {' '}
-
-            {artist}
-
-          </p>
-          {arraySongs.length === 0 ? <p>Nenhum álbum foi encontrado</p> : (
-            arraySongs.map((song) => (
-              <div key={ song.collectionId }>
-                <img src={ song.artworkUrl100 } alt={ song.collectionName } />
-                <Link
-                  data-testid={ `link-to-album-${song.collectionId}` }
-                  to={ `/album/${song.collectionId}` }
-                >
-                  {song.collectionName}
-                </Link>
-
-              </div>
-            ))
-          )}
-        </form>
       </>
     );
   }

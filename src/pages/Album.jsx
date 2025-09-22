@@ -27,19 +27,22 @@ class Album extends Component {
 
   render() {
     const { favoriteMusics, artistName, collectionName, img } = this.state;
-    console.log(favoriteMusics);
     return (
       <>
-        <div data-testid="page-album">
+        <div data-testid="page-album" className="page page-album">
           <Header />
-
         </div>
-        <div id="album">
-          <h2 data-testid="artist-name">{artistName}</h2>
-          <img src={ img } alt={ collectionName } />
-          <p data-testid="album-name">{ collectionName}</p>
-          <MusicCard musics={ favoriteMusics } />
-
+        <div className="container album">
+          <div className="album-header">
+            <img className="album-cover-lg" src={ img } alt={ collectionName } />
+            <div className="album-meta">
+              <h2 data-testid="artist-name" className="album-artist">{artistName}</h2>
+              <p data-testid="album-name" className="album-name">{ collectionName }</p>
+            </div>
+          </div>
+          <div className="tracklist">
+            <MusicCard musics={ favoriteMusics } />
+          </div>
         </div>
 
       </>

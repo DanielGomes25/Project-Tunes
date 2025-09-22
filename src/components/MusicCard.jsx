@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from '../pages/Loading';
 
 class MusicCard extends Component {
@@ -19,25 +19,33 @@ class MusicCard extends Component {
 
   handleFavorit = async (music) => {
     this.setState({ loading: true });
-    await addSong(music);
+    const { onToggle } = this.props;
     const favoriteSongs = await getFavoriteSongs();
+    const alreadyFav = favoriteSongs.some((s) => s.trackId === music.trackId);
+    if (alreadyFav) {
+      await removeSong(music);
+    } else {
+      await addSong(music);
+    }
+    const updated = await getFavoriteSongs();
     this.setState({
       loading: false,
-      isChecked: favoriteSongs,
+      isChecked: updated,
     });
+    if (onToggle) onToggle();
   };
 
   render() {
-    const { musics } = this.props;
+    const { musics, skipFirst } = this.props;
     const { loading, isChecked } = this.state;
     if (loading) return <Loading />;
+    const list = (skipFirst ? musics.slice(1) : musics) || [];
     return (
       <>
-        (
-        {musics.slice(1).map((music) => (
-          <div key={ music.trackNumber } id="musicCard">
-            <h2>{music.trackName}</h2>
-            <audio data-testid="audio-component" src="{previewUrl}" controls>
+        {list.map((music) => (
+          <div key={ music.trackId || music.trackNumber } className="track-card">
+            <h2 className="track-title">{music.trackName}</h2>
+            <audio data-testid="audio-component" src={ music.previewUrl } controls>
               <track kind="captions" />
               O seu navegador não suporta o elemento
               {' '}
@@ -45,7 +53,7 @@ class MusicCard extends Component {
               <code>audio</code>
               .
             </audio>
-            <label>
+            <label className="favorite-toggle">
               Favorita
               <input
                 type="checkbox"
@@ -59,7 +67,6 @@ class MusicCard extends Component {
           </div>
 
         ))}
-        )
       </>
     );
   }
@@ -67,6 +74,13 @@ class MusicCard extends Component {
 
 MusicCard.propTypes = {
   musics: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
+  skipFirst: PropTypes.bool,
+  onToggle: PropTypes.func,
+};
+
+MusicCard.defaultProps = {
+  skipFirst: true,
+  onToggle: undefined,
 };
 
 export default MusicCard;

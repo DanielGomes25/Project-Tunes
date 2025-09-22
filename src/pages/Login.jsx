@@ -37,26 +37,34 @@ class Login extends Component {
     if (isLoading) return <Loading />;
     if (redirect) return <Redirect to="/search" />;
     return (
-      <div data-testid="page-login">
-        <input
-          placeholder="digite seu nome"
-          name="nameInput"
-          type="text"
-          data-testid="login-name-input"
-          id="nameInput"
-          value={ nameInput }
-          onChange={ this.inputChange }
-
-        />
-        <button
-          type="button"
-          data-testid="login-submit-button"
-          onClick={ this.submitBtn }
-          disabled={ !ableBtn }
-        >
-          Entrar
-
-        </button>
+      <div data-testid="page-login" className="page page-login">
+        <div className="container form-card">
+          <h1 className="page-title">Bem-vindo ao Trybe Tunes</h1>
+          <div className="form-group">
+            <label htmlFor="nameInput">Seu nome</label>
+            <input
+              className="input"
+              placeholder="Digite seu nome"
+              name="nameInput"
+              type="text"
+              data-testid="login-name-input"
+              id="nameInput"
+              value={ nameInput }
+              onChange={ this.inputChange }
+            />
+          </div>
+          <div className="actions">
+            <button
+              className="btn primary"
+              type="button"
+              data-testid="login-submit-button"
+              onClick={ this.submitBtn }
+              disabled={ !ableBtn }
+            >
+              Entrar
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
