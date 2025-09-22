@@ -31,7 +31,11 @@ class Favorites extends Component {
           {favorites.length === 0 ? (
             <p className="muted">Você ainda não tem músicas favoritas.</p>
           ) : (
-            <MusicCard musics={ favorites } skipFirst={ false } onToggle={ this.refreshFavorites } />
+            <MusicCard
+              musics={ favorites }
+              skipFirst={ false }
+              onToggle={ this.refreshFavorites }
+            />
           )}
         </div>
       </div>

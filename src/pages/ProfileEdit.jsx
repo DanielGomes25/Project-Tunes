@@ -59,22 +59,47 @@ class ProfileEdit extends Component {
           <h1 className="page-title">Editar Perfil</h1>
           <div className="form-group">
             <label htmlFor="name">Nome</label>
-            <input id="name" name="name" value={ name } onChange={ this.handleChange } />
+            <input
+              id="name"
+              name="name"
+              value={ name }
+              onChange={ this.handleChange }
+            />
           </div>
           <div className="form-group">
             <label htmlFor="email">Email</label>
-            <input id="email" name="email" value={ email } onChange={ this.handleChange } />
+            <input
+              id="email"
+              name="email"
+              value={ email }
+              onChange={ this.handleChange }
+            />
           </div>
           <div className="form-group">
             <label htmlFor="image">URL da Imagem</label>
-            <input id="image" name="image" value={ image } onChange={ this.handleChange } />
+            <input
+              id="image"
+              name="image"
+              value={ image }
+              onChange={ this.handleChange }
+            />
           </div>
           <div className="form-group">
             <label htmlFor="description">Descrição</label>
-            <textarea id="description" name="description" value={ description } onChange={ this.handleChange } />
+            <textarea
+              id="description"
+              name="description"
+              value={ description }
+              onChange={ this.handleChange }
+            />
           </div>
           <div className="actions">
-            <button type="button" className="btn primary" onClick={ this.handleSave } disabled={ !this.isValid() }>
+            <button
+              type="button"
+              className="btn primary"
+              onClick={ this.handleSave }
+              disabled={ !this.isValid() }
+            >
               Salvar
             </button>
           </div>

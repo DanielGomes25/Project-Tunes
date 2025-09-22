@@ -43,7 +43,6 @@ class Search extends Component {
     if (loading) return <Loading />;
 
     return (
-      <>
         <div data-testid="page-search" className="page page-search">
           <Header />
           <div className="container">
@@ -78,10 +77,16 @@ class Search extends Component {
               </p>
             </div>
             <div className="album-grid">
-              {arraySongs.length === 0 ? <p className="muted">Nenhum álbum foi encontrado</p> : (
+              {arraySongs.length === 0 ? (
+                <p className="muted">Nenhum álbum foi encontrado</p>
+              ) : (
                 arraySongs.map((song) => (
                   <div key={ song.collectionId } className="album-card">
-                    <img src={ song.artworkUrl100 } alt={ song.collectionName } className="album-cover" />
+                    <img
+                      src={ song.artworkUrl100 }
+                      alt={ song.collectionName }
+                      className="album-cover"
+                    />
                     <div className="album-info">
                       <h3 className="album-title">{song.collectionName}</h3>
                       <p className="album-artist">{song.artistName}</p>
@@ -99,7 +104,6 @@ class Search extends Component {
             </div>
           </div>
         </div>
-      </>
     );
   }
 }
